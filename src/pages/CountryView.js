@@ -1,4 +1,4 @@
-    import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
     import { useNavigate } from 'react-router-dom';
     import { 
     fetchFirstCountry, 
@@ -139,29 +139,40 @@
     }
 
     return (
-        <div className="flex flex-col justify-center items-center p-6">
-        <SearchAndFilter 
-            onSearch={handleSearch} 
-            onFilter={handleFilter} 
-            regions={regions} 
-        />
-
-        {country && (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-6 max-w-5xl mx-auto">
-            <div>
-                <Flag flagUrl={country.flag} altText={`Flag of ${country.name}`} />
-            </div>
-            <div>
+        <div className="w-full max-w-6xl mx-auto px-4">
+          {/* Search and Filter */}
+          <div className="mb-8">
+            <SearchAndFilter 
+              onSearch={handleSearch} 
+              onFilter={handleFilter} 
+              regions={regions} 
+            />
+          </div>
+    
+          {/* Country Content */}
+          {country && (
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+             
+              <div className="flex justify-center items-center">
+                <Flag 
+                  flagUrl={country.flag} 
+                  altText={`Flag of ${country.name}`} 
+                  className="max-h-96 object-contain"
+                />
+              </div>
+              
+              {/* Details Column */}
+              <div className="text-white">
                 <CountryDetails country={country} />
                 <Borders 
-                borders={borderCountries} 
-                onBorderClick={handleBorderClick} 
+                  borders={borderCountries} 
+                  onBorderClick={handleBorderClick} 
                 />
+              </div>
             </div>
-            </div>
-        )}
+          )}
         </div>
-    );
+      );
     };
-
+    
     export default CountryView;

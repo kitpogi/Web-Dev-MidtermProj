@@ -47,12 +47,18 @@ const CountryPage = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-6">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div>
-          <Flag flagUrl={country.flag} altText={`Flag of ${country.name}`} />
+    <div className="flex justify-center px-4 py-6">
+      <div className="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {/* Centered Flag Column */}
+        <div className="flex justify-center mt-80 items-center">
+          <Flag 
+            flagUrl={country.flag} 
+            altText={`Flag of ${country.name}`} 
+          />
         </div>
-        <div>
+
+        {/* Details Column */}
+        <div className="text-white">
           <CountryDetails country={country} />
           <Borders borders={borderCountries.map(c => c.name)} />
         </div>

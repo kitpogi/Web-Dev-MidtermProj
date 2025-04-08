@@ -13,32 +13,32 @@ const SearchAndFilter = ({ onSearch, onFilter, regions }) => {
   };
 
   return (
-    <div className="absolute top-4 right-4 mb-6 p-4 rounded-lg shadow-md w-full max-w-md">
-      <form onSubmit={handleSearch} className="mb-4 flex justify-between">
-        <div className="flex items-center w-full">
+    <div className="search-filter-container">
+      <form onSubmit={handleSearch} className="search-filter-form">
+        <div className="flex w-full">
           <input
             type="text"
             placeholder="Search for a country..."
-            className="p-2 border border-gray-300 rounded-l focus:outline-none focus:ring-2 focus:ring-blue-500 w-full sm:w-64"
+            className="p-2 bg-transparent border border-gray-300 rounded-l focus:outline-none focus:ring-2 focus:ring-blue-500 w-full sm:w-64 text-white"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
           <button
             type="submit"
-            className="bg-black text-white px-4 py-2 rounded-r hover:bg-blue-700"
+            className="bg-transparent text-white border border-white px-4 py-2 rounded-r hover:bg-blue-700"
           >
             Search
           </button>
         </div>
       </form>
 
-      <div className="flex justify-between">
+      <div className="flex justify-end mt-2">
         <label htmlFor="region-filter" className="text-white block font-semibold mb-2">
           Filter by Region:
         </label>
         <select
           id="region-filter"
-          className="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="p-2 bg-transparent border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
           onChange={handleFilterChange}
           defaultValue="all"
         >

@@ -8,24 +8,33 @@ import './App.css';
 function App() {
   return (
     <Router>
-      <div className="app-container relative">
+      <div className="app-container">
+        {/* Background Video */}
         <div className="video-background">
           <video autoPlay loop muted>
             <source src="/videos/earth-bg.mp4" type="video/mp4" />
             Your browser does not support HTML5 video.
           </video>
+          <div className="video-overlay"></div>
         </div>
 
-        <div className="content-container min-h-screen flex flex-col relative z-10 pt-[calc(60px)] pb-[calc(60px)]">
-          <Header />
-          <main className="flex-grow p-4 relative z-10">
-            <Routes>
-              <Route path="/" element={<CountryView />} />
-              <Route path="/country/:countryName" element={<CountryView />} />
-            </Routes>
-          </main>
-          <Footer />
-        </div>
+        {/* Fixed Header */}
+        <Header />
+          {/* Spacer to offset the fixed header */}
+          <div style={{ height: '25px' }}></div>  {/* Adjust height as needed */}
+
+        {/* Main Content */}
+        <main className="content-container">
+          <div>
+          <Routes>
+            <Route path="/" element={<CountryView />} />
+            <Route path="/country/:countryName" element={<CountryView />} />
+          </Routes>
+          </div>
+        </main>
+
+        {/* Fixed Footer */}
+        <Footer />
       </div>
     </Router>
   );

@@ -18,7 +18,7 @@ const afghanistanFallback = {
   flag: 'https://flagcdn.com/w320/af.png'
 };
 
-// Create axios instance with default config
+
 const api = axios.create({
   baseURL: API_BASE_URL,
   timeout: 10000,
@@ -28,7 +28,7 @@ const api = axios.create({
   }
 });
 
-// Fetch with retry logic
+// Fetch 
 const fetchWithRetry = async (endpoint, retries = 3) => {
   try {
     const response = await api.get(endpoint);

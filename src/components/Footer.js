@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <footer className="bg-black text-white py-3 mt-5">
+    <footer className="text-white py-3 mt-20">
       <div className="container text-center">
         <p className="m-0">&copy; 2025 Keah Criselle B. Bareno. ITS 306 - B.</p>
         <div className="mt-2 d-flex justify-content-center gap-4">
