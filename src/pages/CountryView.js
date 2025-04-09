@@ -139,40 +139,39 @@ import React, { useState, useEffect } from 'react';
     }
 
     return (
-        <div className="w-full max-w-6xl mx-auto px-4">
-          {/* Search and Filter */}
-          <div className="mb-8">
-            <SearchAndFilter 
-              onSearch={handleSearch} 
-              onFilter={handleFilter} 
-              regions={regions} 
-            />
-          </div>
-    
-          {/* Country Content */}
-          {country && (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-             
-              <div className="flex justify-center items-center">
-                <Flag 
-                  flagUrl={country.flag} 
-                  altText={`Flag of ${country.name}`} 
-                  className="max-h-96 object-contain"
-                />
-              </div>
-              
-              {/* Details Column */}
-              <div className="text-white">
-                <CountryDetails country={country} />
-                <Borders 
-                  borders={borderCountries} 
-                  onBorderClick={handleBorderClick} 
-                />
-              </div>
-            </div>
-          )}
+      <div className="w-full max-w-6xl mx-auto px-4">
+        {/* Search and Filter */}
+        <div className="mb-8">
+          <SearchAndFilter 
+            onSearch={handleSearch} 
+            onFilter={handleFilter} 
+            regions={regions} 
+          />
         </div>
-      );
-    };
     
+        {/* Country Content - Vertical Layout */}
+        {country && (
+          <div className="country-card">
+            {/* Flag Section */}
+            <div className="flag-section">
+              <Flag 
+                flagUrl={country.flag} 
+                altText={`Flag of ${country.name}`}
+              />
+            </div>
+            
+            {/* Details Section */}
+            <div className="details-section">
+              <CountryDetails country={country} />
+              <Borders 
+                borders={borderCountries} 
+                onBorderClick={handleBorderClick} 
+              />
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  }
+
     export default CountryView;

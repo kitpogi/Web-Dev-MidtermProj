@@ -32,7 +32,7 @@ header {
   left: 0;
   width: 100%;
   z-index: 1000;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color:transparent;
   backdrop-filter: blur(5px);
   padding: 10px 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -47,7 +47,7 @@ footer {
   left: 0;
   width: 100%;
   z-index: 1000;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: transparent;
   backdrop-filter: blur(5px);
   padding: 10px 20px;
   box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
@@ -58,8 +58,8 @@ footer {
 
 /* Content Area */
 .content-container {
-  margin-top: 20px; /* Header height */
-  margin-bottom: 10px; /* Footer height */
+  margin-top: 20px; 
+  margin-bottom: 10px; 
   padding: 20px;
   min-height: calc(100vh - 140px); 
   position: relative;
@@ -79,17 +79,85 @@ body {
 
 .search-filter-container {
   position: absolute;
-  top: 20px; /* Adjust to your desired vertical position */
-  right: 20px; /* Moves the search bar to the right */
-  z-index: 10; /* Makes sure the search bar appears on top */
+  top: 20px; 
+  right: 20px; 
+  z-index: 10; 
 }
 
 .search-filter-container form {
   display: flex;
   flex-direction: column;
-  align-items: flex-end; /* Aligns the input and button to the right */
+  align-items: flex-end; 
 }
 
 .search-filter-container select {
-  margin-top: 10px; /* Adds some space between the search bar and the filter */
+  margin-top: 10px; 
+}
+
+/* Country Card Styles */
+.country-card {
+  background: transparent;
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.flag-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flag-section img {
+  max-height: 300px;
+  width: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.details-section {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+
+
+.country-name {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  color: white;
+}
+
+.detail-label {
+  font-weight: 600;
+  color: #d1d5db;
+  min-width: 120px;
+  display: inline-block;
+}
+
+.details-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  .details-columns {
+    grid-template-columns: 1fr;
+  }
+  
+  
+  
+  .flag-section img {
+    max-height: 200px;
+  }
 }

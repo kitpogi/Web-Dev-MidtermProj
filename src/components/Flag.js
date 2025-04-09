@@ -5,7 +5,6 @@ const Flag = ({ flagUrl, altText }) => {
     <img 
       src={flagUrl} 
       alt={altText} 
-      className="h-auto mx-auto" // Ensures the image is centered horizontally
       width="300" 
     />
   );
