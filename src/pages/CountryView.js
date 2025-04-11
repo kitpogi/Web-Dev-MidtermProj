@@ -118,7 +118,7 @@ import React, { useState, useEffect } from 'react';
 
     if (loading) {
         return (
-        <div className="text-center py-8">
+        <div className="text-center text-white py-8">
             Loading country data...
         </div>
         );

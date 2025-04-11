@@ -44,7 +44,7 @@ const SearchAndFilter = ({ onSearch, onFilter, regions }) => {
         >
           <option value="all">All Regions</option>
           {regions.map((region) => (
-            <option key={region} value={region}>
+            <option className="text-black" key={region} value={region}>
               {region}
             </option>
           ))}
