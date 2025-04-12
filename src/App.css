@@ -1,104 +1,81 @@
 /* Background Styles */
-.video-background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  overflow: hidden;
-}
-
-.video-background video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  /* Removed filter: blur() completely */
-}
-
-.video-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.3); /* Slightly lighter overlay for better text contrast */
-}
-
-/* Header Styles */
-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-  background-color:transparent;
-  backdrop-filter: blur(5px);
-  padding: 10px 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  display: flex;
-  align-items: center;
-}
-
-/* Footer Styles */
-footer {
-  position: relative;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-  background-color: transparent;
-  backdrop-filter: blur(5px);
-  padding: 10px 20px;
-  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Content Area */
-.content-container {
-  margin-top: 20px; 
-  margin-bottom: 10px; 
-  padding: 20px;
-  min-height: calc(100vh - 140px); 
-  position: relative;
-  z-index: 1;
-}
-
-.text-white {
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
-}
-
-
 body {
+  background: linear-gradient(135deg, #2d3b8f, #3f72af); /* Gradient from blue to light blue */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  color: #ffffff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   height: 100%;
   overflow-x: hidden;
 }
 
-.search-filter-container {
-  position: absolute;
-  top: 20px; 
-  right: 20px; 
-  z-index: 10; 
+/* Header & Footer */
+header,
+footer {
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(5px);
+  padding: 10px 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  position: fixed;
+  width: 100%;
+  display: flex;
+  align-items: center;
 }
 
-.search-filter-container form {
+header {
+  top: 0;
+}
+
+footer {
+  bottom: 0;
+  justify-content: center;
+}
+
+/* Content Area */
+.content-container {
+  margin-top: 150px;  /* Adjusted top margin to ensure the content does not overlap with the search bar */
+  margin-bottom: 60px;
+  padding: 20px;
+  min-height: calc(100vh - 140px);
+  position: relative;
+  z-index: 1;
+}
+
+/* Search Filter */
+.search-filter-container {
+  position: fixed;
+  top: 80px;  /* Adjust this value to place the filter just below the header */
+  left: 50%;  /* Horizontally center */
+  transform: translateX(-50%);  /* Adjust position to truly center it */
+  z-index: 10;
   display: flex;
-  flex-direction: column;
-  align-items: flex-end; 
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.7);  /* Darker background for the filter region */
+  padding: 5px 20px;
+  border-radius: 30px;  /* Rounded corners */
+  width: auto;
+  max-width: 80%;  /* Control the width */
 }
 
 .search-filter-container select {
-  margin-top: 10px; 
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid #666;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;  /* Round the select box */
+  margin-left: 10px;  /* Space between the elements */
+  width: auto;  /* Allow width to adjust based on content */
 }
 
-/* Country Card Styles */
+/* Country Card */
 .country-card {
-  background: transparent;
+  background-color: rgba(0, 0, 0, 0.5);
   border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 2rem;
   display: flex;
@@ -128,8 +105,6 @@ body {
   gap: 1.5rem;
 }
 
-
-
 .country-name {
   font-size: 2rem;
   font-weight: bold;
@@ -154,10 +129,18 @@ body {
   .details-columns {
     grid-template-columns: 1fr;
   }
-  
-  
-  
+
   .flag-section img {
     max-height: 200px;
   }
+}
+
+/* Text */
+.text-white {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+/* Smooth transitions */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease;
 }

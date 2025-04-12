@@ -4,10 +4,10 @@ const Footer = () => {
   return (
     <footer className="text-white py-3 mt-20">
       <div className="container text-center">
-        <p className="m-0">&copy; 2025 Keah Criselle B. Bareno. ITS 306 - B.</p>
+        <p className="m-0">&copy; 2025 Justine Kit E. Solon. ITS 306 - B.</p>
         <div className="mt-2 d-flex justify-content-center gap-4">
           <a
-            href="https://web.facebook.com/keahbareno8"
+            href="https://www.facebook.com/kitjustin.solon"
             target="_blank"
             rel="noopener noreferrer"
             className="text-white text-decoration-none"
@@ -16,14 +16,14 @@ const Footer = () => {
             <i className="fab fa-facebook fa-lg me-1"></i> Facebook
           </a>
           <a
-            href="mailto:barenokcy@gmail.com"
+            href="mailto:solonjustinekit@gmail.com"
             className="text-white text-decoration-none"
             title="Gmail"
           >
             <i className="fas fa-envelope fa-lg me-1"></i> Gmail
           </a>
           <a
-            href="https://github.com/KeahB"
+            href="https://github.com/kitpogi"
             target="_blank"
             rel="noopener noreferrer"
             className="text-white text-decoration-none"

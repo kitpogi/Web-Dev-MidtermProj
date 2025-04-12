@@ -10,7 +10,7 @@ const Header = () => {
         <h1 className="m-0 fs-5 flex items-center gap-2">
           <FaGlobe className="text-white" /> {/* Earth icon */}
           <Link to="/" className="text-white text-decoration-none">
-            Keah Nation
+            Midterm Project
           </Link>
         </h1>
 

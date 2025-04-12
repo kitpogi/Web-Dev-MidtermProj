@@ -9,16 +9,7 @@ function App() {
   return (
     <Router>
       <div className="app-container">
-        {/* Background Video */}
-        <div className="video-background">
-          <video autoPlay loop muted>
-            <source src="/videos/earth-bg.mp4" type="video/mp4" />
-            Your browser does not support HTML5 video.
-          </video>
-          <div className="video-overlay"></div>
-        </div>
-
-        {/* Fixed Header */}
+        {/* Fixed Header */}  
         <Header />
           {/* Spacer to offset the fixed header */}
           <div style={{ height: '25px' }}></div>  {/* Adjust height as needed */}
