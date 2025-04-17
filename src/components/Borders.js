@@ -17,7 +17,7 @@ const Borders = ({ borders, onBorderClick }) => {
           ))}
         </div>
       ) : (
-        <p className="text-white">No border countries</p>
+        <p className="text-white">No border countries</p> 
       )}
     </div>
   );

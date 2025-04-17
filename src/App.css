@@ -1,6 +1,6 @@
 /* Background Styles */
 body {
-  background: linear-gradient(135deg, #2d3b8f, #3f72af); /* Gradient from blue to light blue */
+  background-image: url('/public/images/background.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -33,6 +33,7 @@ header {
 footer {
   bottom: 0;
   justify-content: center;
+  font-size: small;
 }
 
 /* Content Area */
