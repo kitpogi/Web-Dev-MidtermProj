@@ -80,19 +80,19 @@ export const fetchCountriesByRegion = async (region) => {
 };
 
 export const fetchBorderCountries = async (borderNames) => {
-  if (!borderNames || borderNames.length === 0) return [];
-  try {
-    const borderPromises = borderNames.map(name => 
-      fetchWithRetry(`/countries/${encodeURIComponent(name)}`)
-    );
-    const responses = await Promise.all(borderPromises);
-    return responses.map(response => response.data);
-  } catch (error) {
-    console.error('Error fetching border countries:', error.message);
-    return [];
-  }
-};
-
+  const borderPromises = borderNames.map(async (name) => {
+    try {
+      const response = await fetchWithRetry(`/countries/${encodeURIComponent(name)}`);
+      return response.data;
+    } catch {
+      console.warn(`Border country not found: ${name}`);
+      return null;
+    }
+  });
+  const responses = await Promise.all(borderPromises);
+  return responses.filter(Boolean); // Filter out nulls
+  
+}
 const predefinedRegions = ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania'];
 
 export const getAvailableRegions = () => {

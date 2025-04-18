@@ -2,11 +2,13 @@ import React from 'react';
 
 const Flag = ({ flagUrl, altText }) => {
   return (
-    <img 
-      src={flagUrl} 
-      alt={altText} 
-      width="300" 
-    />
+    <div className="flag-container">
+      <img 
+        src={flagUrl} 
+        alt={altText}
+        className="country-flag"
+      />
+    </div>  
   );
 };
 

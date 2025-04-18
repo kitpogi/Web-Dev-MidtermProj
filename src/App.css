@@ -36,40 +36,29 @@ footer {
   font-size: small;
 }
 
-/* Content Area */
+/* Header Styles */
+header {
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(5px);
+  padding: 10px 20px; /* You can reduce this if needed */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  display: flex;
+  justify-content: space-between; /* Make sure it's not taking up too much space */
+  align-items: center;
+  height: 60px; /* Adjust this height if necessary */
+}
+
 .content-container {
-  margin-top: 150px;  /* Adjusted top margin to ensure the content does not overlap with the search bar */
+  margin-top: 80px; /* Adjust this margin for the header height */
   margin-bottom: 60px;
   padding: 20px;
   min-height: calc(100vh - 140px);
   position: relative;
   z-index: 1;
-}
-
-/* Search Filter */
-.search-filter-container {
-  position: fixed;
-  top: 80px;  /* Adjust this value to place the filter just below the header */
-  left: 50%;  /* Horizontally center */
-  transform: translateX(-50%);  /* Adjust position to truly center it */
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.7);  /* Darker background for the filter region */
-  padding: 5px 20px;
-  border-radius: 30px;  /* Rounded corners */
-  width: auto;
-  max-width: 80%;  /* Control the width */
-}
-
-.search-filter-container select {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: white;
-  border: 1px solid #666;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;  /* Round the select box */
-  margin-left: 10px;  /* Space between the elements */
-  width: auto;  /* Allow width to adjust based on content */
 }
 
 /* Country Card */
@@ -86,24 +75,15 @@ footer {
   margin: 0 auto;
 }
 
-.flag-section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.flag-section img {
-  max-height: 300px;
-  width: auto;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.details-section {
-  color: white;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+/* Country Details Specific Styles */
+.details-grid {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .country-name {
@@ -111,6 +91,31 @@ footer {
   font-weight: bold;
   margin-bottom: 1.5rem;
   color: white;
+  text-align: center;
+}
+
+.flag-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.country-flag {
+  max-width: 300px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .country-flag {
+    max-width: 200px;
+  }
+}
+.details-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
 }
 
 .detail-label {
@@ -120,19 +125,36 @@ footer {
   display: inline-block;
 }
 
-.details-columns {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
+.borders-section {
+  margin-top: 20px;
 }
 
+.borders-section h3 {
+  margin-bottom: 10px;
+}
+
+.borders-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+}
+
+.borders-list li {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
   .details-columns {
     grid-template-columns: 1fr;
   }
 
-  .flag-section img {
-    max-height: 200px;
+  .country-flag {
+    max-width: 200px;
   }
 }
 
@@ -144,4 +166,21 @@ footer {
 /* Smooth transitions */
 * {
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ✅ Center SearchAndFilter and Country Card Fix */
+.search-filter-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+
+.country-card {
+  align-items: center; /* Optional: for center alignment inside card */
+}
+
+.search-filter-wrapper form {
+  width: 100%;
 }

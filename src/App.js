@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import CountryView from './pages/CountryView';
 import './App.css';
+import './index.css';
 
 function App() {
   return (
