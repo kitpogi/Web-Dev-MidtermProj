@@ -69,10 +69,23 @@ export const fetchCountryByName = async (name) => {
 export const fetchCountriesByRegion = async (region) => {
   try {
     const response = await api.get('/countries');
-    if (!response.data || !Array.isArray(response.data.data)) {
-      throw new Error('Invalid response format');
+    console.log('API Response:', response.data); // Debugging
+
+    // Access the actual array of countries from response.data
+    const countries = response.data.data;
+
+    if (!countries || !Array.isArray(countries)) {
+      console.warn('Unexpected API response, returning empty array');
+      return [];
     }
-    return response.data.data.filter(country => country.region === region);
+
+    // Normalize region comparison to avoid case sensitivity issues
+    console.log('Filtered countries:', countries.filter(
+      (country) => country.region?.toLowerCase() === region.toLowerCase()
+    ));
+    return countries.filter(
+      (country) => country.region?.toLowerCase() === region.toLowerCase()
+    );
   } catch (error) {
     console.error(`Error fetching countries in ${region}:`, error.message);
     throw new Error(`Failed to fetch countries in region: ${region}`);

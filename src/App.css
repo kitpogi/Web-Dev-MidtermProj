@@ -90,7 +90,7 @@ header {
   font-size: 2rem;
   font-weight: bold;
   margin-bottom: 1.5rem;
-  color: white;
+  color: black;
   text-align: center;
 }
 
@@ -114,15 +114,24 @@ header {
 }
 .details-columns {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
+  grid-template-columns: 1fr 1fr; /* Two columns for larger screens */
+  gap: 1rem; /* Adds spacing between columns */
+  word-wrap: break-word; /* Ensures long text wraps properly */
+}
+
+@media (max-width: 768px) {
+  .details-columns {
+    grid-template-columns: 1fr; /* Single column on smaller screens */
+  }
 }
 
 .detail-label {
   font-weight: 600;
   color: #d1d5db;
-  min-width: 120px;
+  min-width: 150px;
   display: inline-block;
+  white-space: nowrap; /* Prevent wrapping */
+  margin-right: 8px;
 }
 
 .borders-section {
@@ -176,7 +185,6 @@ header {
   margin-bottom: 2rem;
 }
 
-
 .country-card {
   align-items: center; /* Optional: for center alignment inside card */
 }
@@ -184,3 +192,22 @@ header {
 .search-filter-wrapper form {
   width: 100%;
 }
+
+/* Grid Layout for Filtered Countries */
+.region-filter-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two columns for larger screens */
+  gap: 1.5rem; /* Adds spacing between grid items */
+}
+
+@media (max-width: 768px) {
+  .region-filter-grid {
+    grid-template-columns: 1fr; /* Single column on smaller screens */
+  }
+}
+
+.region-country-card {
+  max-width: 300px; /* Adjust the width for filtered region output */
+  margin: 0 auto; /* Center the cards horizontally */
+}
+

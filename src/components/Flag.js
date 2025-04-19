@@ -2,13 +2,13 @@ import React from 'react';
 
 const Flag = ({ flagUrl, altText }) => {
   return (
-    <div className="flag-container">
-      <img 
-        src={flagUrl} 
+    <div className="flex justify-center items-center h-48 w-full rounded-lg overflow-hidden">
+      <img
+        src={flagUrl}
         alt={altText}
-        className="country-flag"
+        className="w-full h-full object-contain"
       />
-    </div>  
+    </div>
   );
 };
 

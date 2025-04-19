@@ -12,6 +12,27 @@ const CountryPage = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    const loadInitialData = async () => {
+      try {
+        setLoading(true); // Start loading
+        const afghanistan = await fetchFirstCountry();
+        setCountry(afghanistan);
+
+        if (afghanistan.borders && afghanistan.borders.length > 0) {
+          const borders = await fetchBorderCountries(afghanistan.borders);
+          setBorderCountries(borders);
+        }
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false); // Stop loading
+      }
+    };
+
+    loadInitialData();
+  }, []);
+
+  useEffect(() => {
     const loadCountryData = async () => {
       try {
         setLoading(true);

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Modal from '../components/modal';
 import { 
   fetchFirstCountry, 
   fetchCountryByName, 
@@ -10,13 +11,16 @@ import {
 import CountryDetails from '../components/CountryDetails';
 import Borders from '../components/Borders';
 import SearchAndFilter from '../components/SearchandFilter';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const CountryView = () => {
   const [country, setCountry] = useState(null);
   const [borderCountries, setBorderCountries] = useState([]);
   const [regions] = useState(getAvailableRegions());
+  const [filteredCountries, setFilteredCountries] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,6 +36,7 @@ const CountryView = () => {
         }
       } catch (err) {
         setError(err.message);
+        setShowModal(true);
       } finally {
         setLoading(false);
       }
@@ -40,9 +45,14 @@ const CountryView = () => {
     loadInitialData();
   }, []);
 
+  useEffect(() => {
+    console.log('Loading state:', loading);
+  }, [loading]);
+
   const handleSearch = async (searchTerm) => {
     if (!searchTerm.trim()) {
       setError('Please enter a country name');
+      setShowModal(true);
       return;
     }
 
@@ -63,29 +73,18 @@ const CountryView = () => {
       navigate(`/country/${searchTerm}`);
     } catch (err) {
       setError(err.message);
+      setShowModal(true);
     } finally {
       setLoading(false);
     }
   };
 
   const handleFilter = async (region) => {
-    if (!region || region === 'all') return;
     try {
       setLoading(true);
-      setError(null);
       const countriesInRegion = await fetchCountriesByRegion(region);
-      if (countriesInRegion.length > 0) {
-        setCountry(countriesInRegion[0]);
-        
-        if (countriesInRegion[0].borders?.length > 0) {
-          const borders = await fetchBorderCountries(countriesInRegion[0].borders);
-          setBorderCountries(borders);
-        } else {
-          setBorderCountries([]);
-        }
-        
-        navigate(`/country/${countriesInRegion[0].name}`);
-      }
+      setFilteredCountries(countriesInRegion);
+      setCountry(null); // Clear the currently selected country
     } catch (err) {
       setError(err.message);
     } finally {
@@ -99,46 +98,41 @@ const CountryView = () => {
       setError(null);
       const borderCountry = await fetchCountryByName(borderCountryName);
       setCountry(borderCountry);
-      
+
       if (borderCountry.borders?.length > 0) {
         const borders = await fetchBorderCountries(borderCountry.borders);
         setBorderCountries(borders);
       } else {
         setBorderCountries([]);
       }
-      
+
       navigate(`/country/${borderCountryName}`);
     } catch (err) {
       setError(err.message);
+      setShowModal(true);
     } finally {
       setLoading(false);
     }
   };
 
-  if (loading) {
-    return (
-      <div className="text-center text-white py-8">
-        Loading country data...
-      </div>
-    );
-  }
+  const closeModal = () => {
+    setShowModal(false);
+    setError(null);
+  };
 
-  if (error) {
-    return (
-      <div className="text-center py-8">
-        <p className="text-red-500 mb-4">{error}</p>
-        <button 
-          onClick={() => window.location.reload()}
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-        >
-          Try Again
-        </button>
-      </div>
-    );
+  if (loading) {
+    return <LoadingSpinner />;
   }
 
   return (
     <div className="content-container">
+      {showModal && (
+        <Modal
+          title="Error"
+          message={error || 'An unexpected error occurred.'}
+          onClose={closeModal}
+        />
+      )}
       {/* 🔹 Search and Filter (centered at top) */}
       <div className="search-filter-wrapper">
         <SearchAndFilter 
@@ -151,7 +145,7 @@ const CountryView = () => {
       {/* 🔹 Country Card (centered below search) */}
       {country && (
         <div className="mt-8 w-full flex justify-center">
-          <div className="country-card w-full max-w-4xl bg-white bg-opacity-10 p-6 rounded shadow text-white">
+          <div className="country-card w-full max-w-4xl bg-transparent bg-opacity-10 p-6 rounded-lg shadow text-black">
             {/* Details Section */}
             <div className="details-section mt-4">
               <CountryDetails country={country} />
@@ -161,6 +155,66 @@ const CountryView = () => {
               />
             </div>
           </div>
+        </div>
+      )}
+
+      {/* 🔹 Filtered Countries Grid */}
+      {filteredCountries.length > 0 && (
+        <div className="region-filter-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {filteredCountries.map((country, index) => (
+            <div
+              key={country.alpha3Code || `country-${index}`}
+              className="country-card w-full max-w-sm bg-white bg-opacity-10 p-3 rounded-lg shadow text-white min-w-[180px] inline-block whitespace-nowrap"
+            >
+              {/* Flag Section */}
+              <div className="flex justify-center items-center h-24 mb-3">
+                <img
+                  src={country.flag}
+                  alt={`Flag of ${country.name}`}
+                  className="w-full h-full object-contain max-h-20"
+                />
+              </div>
+
+              {/* Country Details */}
+              <h2 className="text-lg font-bold text-center">{country.name}</h2>
+              <div className="flex flex-col gap-1 text-sm">
+                <p className="flex justify-between">
+                  <span className="detail-label font-bold">Capital:</span> <span>{country.capital || 'N/A'}</span>
+                </p>
+                <p className="flex justify-between">
+                  <span className="detail-label font-bold">Region:</span> <span>{country.region || 'N/A'}</span>
+                </p>
+                <p className="flex justify-between">
+                  <span className="detail-label font-bold">Population:</span> 
+                  <span>{typeof country.population === 'number' ? country.population.toLocaleString() : 'N/A'}</span>
+                </p>
+                <p className="flex justify-between">
+                  <span className="detail-label font-bold">Area:</span> 
+                  <span>{typeof country.area === 'number' ? `${country.area.toLocaleString()} km²` : 'N/A'}</span>
+                </p>
+                <p className="flex justify-between">
+                  <span className="detail-label font-bold">Coordinates:</span> 
+                  <span>
+                    {country.latlng && country.latlng.length === 2
+                      ? `${country.latlng[0]}, ${country.latlng[1]}`
+                      : 'N/A'}
+                  </span>
+                </p>
+                <p className="flex justify-between">
+                  <span className="detail-label font-bold">Timezones:</span> 
+                  <span>{country.timezones ? country.timezones.join(', ') : 'N/A'}</span>
+                </p>
+                <p className="flex justify-between">
+                  <span className="detail-label font-bold">Currency:</span> 
+                  <span>{country.currencies ? Object.values(country.currencies).map(c => c.name).join(', ') : 'N/A'}</span>
+                </p>
+                <p className="flex justify-between">
+                  <span className="detail-label font-bold">Languages:</span> 
+                  <span>{country.languages ? Object.values(country.languages).join(', ') : 'N/A'}</span>
+                </p>
+              </div>
+            </div>
+          ))}
         </div>
       )}
     </div>

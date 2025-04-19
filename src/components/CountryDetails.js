@@ -1,8 +1,8 @@
 import React from 'react';
 import Flag from './Flag';
-import Borders from './Borders'; // Make sure to import Borders
+import Borders from './Borders';
 
-const CountryDetails = ({ country, borderCountries = [] }) => { // Added borderCountries prop
+const CountryDetails = ({ country, borderCountries = [] }) => {
   if (!country) return <div>Loading...</div>;
 
   // Safely extract values with fallbacks
@@ -21,16 +21,15 @@ const CountryDetails = ({ country, borderCountries = [] }) => { // Added borderC
   } = country;
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
       {/* Flag Column */}
-      <div className="flex justify-center">
+      <div className="flex justify-center items-center h-48">
         <Flag flagUrl={flag} altText={`Flag of ${name}`} />
       </div>
 
       {/* Details Column */}
-      <div className="text-white">
-        <h2 className="text-3xl font-bold mb-4">{name}</h2>
-        
+      <div className="text-white flex flex-col gap-4 break-words">
+        <h2 className="text-xl font-bold text-center">{name}</h2>
         <div className="details-columns grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <p><span className="detail-label">Capital:</span> {capital}</p>
